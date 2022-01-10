@@ -5,8 +5,6 @@ import 'package:flutter_weather_app/modals/net_images.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter_weather_app/screens/search_result_screen.dart';
 
-
-
 class searchWeather extends StatefulWidget {
   const searchWeather({Key? key}) : super(key: key);
 
@@ -16,28 +14,28 @@ class searchWeather extends StatefulWidget {
 
 class _searchWeatherState extends State<searchWeather> {
 
-
-  // image //
+  ///creating an images object in order to access the properties and method from the Images class in net_image.dart
   Images images = new Images();
-  // image //
 
-  // data //
+  ///creating a weather_details object in order to access the properties and method from the Weather class in weather.dart
   Weather weather_details = Weather();
-  // data //
 
-
-  // find weather by search city //
+  ///search and find weather details by city
   Future<void> getweather(String city) async{
 
+    ///assigning the api key generated via openweathermap.org to a const variable 'apiKey'
     const apiKey = '3c54ab9d26042e0eb89ccfed5f34cb23';
-    // weather //
+
+    ///creates a new Uri object by parsing a URI string to 'url' variable
     var url = Uri.parse("http://api.openweathermap.org/data/2.5/weather?q=$city&appid=$apiKey&units=metric");
 
+    ///fetches data from the weather api via web
     http.Response  response =  await http.get(url);
+    ///returns the json object
     var result =  jsonDecode(response.body);
 
-
     setState(() {
+      ///assigning openweathermap api values
       weather_details.temp = result['main']['temp'];
       weather_details.description = result["weather"][0]['description'];
       weather_details.currently = result["weather"][0]['main'];
@@ -46,6 +44,7 @@ class _searchWeatherState extends State<searchWeather> {
       weather_details.speed = result["wind"]['speed'];
       weather_details.name = result["name"];
 
+      ///weather images displayed based on weather condition
       if(weather_details.currently.toString() == "Clouds"){
         weather_details.icon = images.Clouds;
       }
@@ -67,8 +66,12 @@ class _searchWeatherState extends State<searchWeather> {
       else if (weather_details.currently.toString() == "Thunderstorm"){
         weather_details.icon = images.Thunderstorm;
       }
+      else if (weather_details.currently.toString() == "Fog"){
+        weather_details.icon = images.Fog;
+      }
     });
 
+    ///returning searched result api values when navigating to the search_result_screen.dart screen via MaterialPageRoute
     Navigator.of(context).push(MaterialPageRoute(builder: (context){
       return  searchResult(
         temp: weather_details.temp,
@@ -81,13 +84,10 @@ class _searchWeatherState extends State<searchWeather> {
         speed: weather_details.speed,
       );
     }));
-    // weather //
-
   }
 
-  // controller for TextField //
+  ///controller for TextField - search
   TextEditingController nameController = TextEditingController();
-
 
 
   @override
@@ -100,12 +100,11 @@ class _searchWeatherState extends State<searchWeather> {
       backgroundColor: const Color(0xFF030615),
       body:SafeArea(
         child: SingleChildScrollView(
-          child: Expanded(
+          child: Container(
             child: Column(
               children: <Widget>[
-
                 Row(
-                  // TextField & button //
+                  ///TextField & selection buttons
                   children: [
                     Container(
                       alignment: Alignment.center,
@@ -140,14 +139,10 @@ class _searchWeatherState extends State<searchWeather> {
                         ))
                   ],
                 ),
-
-
                 SizedBox(
                   height: he * 0.03,
                 ),
-
-
-                //   << popular cities >>  //
+                ///   << popular cities >>  ///
                 Row(
                   // row cities //
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -202,7 +197,6 @@ class _searchWeatherState extends State<searchWeather> {
                             borderRadius: BorderRadius.circular(20.0),
                             color: Colors.white12
                         ),
-
                         child: const Text("Melbourne",style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold),),
                       ),
                     ),
@@ -211,9 +205,7 @@ class _searchWeatherState extends State<searchWeather> {
                 SizedBox(
                   height: he * 0.03,
                 ),
-
-
-                // 2 row cities //
+                ///2 row cities
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
@@ -229,7 +221,6 @@ class _searchWeatherState extends State<searchWeather> {
                             borderRadius: BorderRadius.circular(20.0),
                             color: Colors.white12
                         ),
-
                         child: const Text("Delhi",style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold),),
                       ),
                     ),
@@ -257,14 +248,10 @@ class _searchWeatherState extends State<searchWeather> {
                     ),
                   ],
                 ),
-
-
                 SizedBox(
                   height: he * 0.03,
                 ),
-
-
-                //  3 rows cities //
+                ///3 rows cities
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
@@ -280,7 +267,6 @@ class _searchWeatherState extends State<searchWeather> {
                             borderRadius: BorderRadius.circular(20.0),
                             color: Colors.white12
                         ),
-
                         child: const Text("Tokyo",style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold),),
                       ),
                     ),
@@ -299,7 +285,6 @@ class _searchWeatherState extends State<searchWeather> {
                             borderRadius: BorderRadius.circular(20.0),
                             color: Colors.white12
                         ),
-
                         child: const Text("Paris",style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold),),
                       ),
                     ),
@@ -318,21 +303,17 @@ class _searchWeatherState extends State<searchWeather> {
                             borderRadius: BorderRadius.circular(20.0),
                             color: Colors.white12
                         ),
-
                         child: const Text("New York",style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold),),
                       ),
                     ),
                   ],
                 ),
-              ],
-            ),
-
-          ),
-        ),
+              ],),
+          ),),
       ),
     );
   }
-}
+ }
 
 
 

@@ -1,5 +1,5 @@
 class Weather{
-
+///declaring variables for weather details
   var temp;
   var description;
   var speed;
@@ -12,3 +12,5 @@ class Weather{
   Weather({this.temp, this.description,this.speed,this.currently,this.humidity,this.icon, this.name, this.feels_like});
 
 }
+
+
