@@ -1,4 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_weather_app/screens/weather_forecast.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -61,6 +62,12 @@ class _HomeScreenState extends State<HomeScreen> {
     http.Response response =  await http.get(url);
     ///returns the json object
     var result =  jsonDecode(response.body);
+
+    ///printing api response details
+    if (kDebugMode) {
+      // print('Current Weather Details:' + response.body);
+      print('Navigated to Home Screen');
+    }
 
     setState(() {
       ///assigning openweathermap api values
@@ -185,7 +192,7 @@ class _HomeScreenState extends State<HomeScreen> {
                               height: he * 0.01,
                             ),
                             ///current temperature is displayed in degrees celsius (ex: 26°C)
-                            Text(weather_details.temp.toString()+"°",style: GoogleFonts.asap(
+                            Text(weather_details.temp.toString()+"°C",style: GoogleFonts.asap(
                               color: Colors.white70,
                               fontSize: 68.0,
                               fontWeight: FontWeight.bold,

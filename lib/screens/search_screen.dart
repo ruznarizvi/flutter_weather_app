@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_weather_app/modals/weather.dart';
 import 'package:flutter_weather_app/modals/net_images.dart';
@@ -33,6 +34,12 @@ class _searchWeatherState extends State<searchWeather> {
     http.Response  response =  await http.get(url);
     ///returns the json object
     var result =  jsonDecode(response.body);
+
+    ///printing api response details
+    if (kDebugMode) {
+       print('Searched Weather Details:' + response.body);
+      //print('Navigated to Search Screen');
+    }
 
     setState(() {
       ///assigning openweathermap api values

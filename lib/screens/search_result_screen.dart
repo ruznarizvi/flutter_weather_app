@@ -13,6 +13,7 @@ enum _weather{
   search,
   home,
 }
+
 class searchResult extends StatefulWidget {
   searchResult({required this.temp,required this.humidity,required this.description,required this.currently,required this.name,
     required this.icon, required this.feels_like,required this.speed});
@@ -43,6 +44,7 @@ class _searchResultState extends State<searchResult> {
   var feels_like;
   var name;
   var icon;
+
 
   ///assigning colors
   Color deactivecolor = Colors.white24;
@@ -87,6 +89,7 @@ class _searchResultState extends State<searchResult> {
                             SizedBox(
                               height: he * 0.02,
                             ),
+                            ///current weather location is displayed
                             Text(name.toString(),style:GoogleFonts.alata(
                               fontSize: 30.0,
                               color: Colors.white,
@@ -100,11 +103,13 @@ class _searchResultState extends State<searchResult> {
                             SizedBox(
                               height: he * 0.025,
                             ),
+                            ///current weather description is displayed
                             Text(currently.toString(),style: const TextStyle(color: Colors.white,fontWeight: FontWeight.bold,fontSize: 20.0),),
                             SizedBox(
                               height: he * 0.02,
                             ),
-                            Text(temp.toString()+"°",style: GoogleFonts.asap( // 31°
+                            ///current weather temperature is displayed
+                            Text(temp.toString()+"°C",style: GoogleFonts.asap( // 31°
                               color: Colors.white60,
                               fontSize: 70.0,
                               fontWeight: FontWeight.bold,
@@ -227,7 +232,8 @@ class _searchResultState extends State<searchResult> {
                     }));
                   });
                 },
-                child:  Icon(Icons.search_outlined,color: selected == _weather.search ? active : deactivecolor,size: 38.0,)),
+                child:  Icon(Icons.search_outlined,color: selected == _weather.search ? active : deactivecolor,size: 38.0,)
+            ),
             SizedBox(
               width: we * 0.08,
             ),
@@ -240,7 +246,8 @@ class _searchResultState extends State<searchResult> {
                     }));
                   });
                 },
-                child:  Icon(Icons.home_rounded,color: selected == _weather.home ? active : deactivecolor,size: 38.0,)),
+                child:  Icon(Icons.home_rounded,color: selected == _weather.home ? active : deactivecolor,size: 38.0,)
+            ),
           ],
         ),
         ///else, the loading widget is displayed

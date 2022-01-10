@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:intl/intl.dart';
@@ -104,7 +105,16 @@ class _weatherForecastState extends State<weatherForecast> {
     http.Response response =  await http.get(url);
 
     http.get(url).then((onResp) {
-   //print(onResp.body);
+
+      ///printing api response details
+      // if (kDebugMode) {
+      //   print('5 Day Forecast:' + response.body);
+      // }
+
+      ///printing api response details
+      if (kDebugMode) {
+        print('Navigated to 5-Day Forecast Screen');
+      }
       setState(() {
         this.weatherDate=json.decode(response.body);
 
