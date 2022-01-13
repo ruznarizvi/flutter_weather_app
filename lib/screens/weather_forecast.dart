@@ -107,14 +107,14 @@ class _weatherForecastState extends State<weatherForecast> {
     http.get(url).then((onResp) {
 
       ///printing api response details
+      if (kDebugMode) {
+        print('5 Day Forecast:' + response.body);
+      }
+
       // if (kDebugMode) {
-      //   print('5 Day Forecast:' + response.body);
+      //   print('Navigated to 5-Day Forecast Screen');
       // }
 
-      ///printing api response details
-      if (kDebugMode) {
-        print('Navigated to 5-Day Forecast Screen');
-      }
       setState(() {
         this.weatherDate=json.decode(response.body);
 

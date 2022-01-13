@@ -65,8 +65,8 @@ class _HomeScreenState extends State<HomeScreen> {
 
     ///printing api response details
     if (kDebugMode) {
-      // print('Current Weather Details:' + response.body);
-      print('Navigated to Home Screen');
+      print('Current Weather Details:' + response.body);
+      //print('Navigated to Home Screen');
     }
 
     setState(() {
